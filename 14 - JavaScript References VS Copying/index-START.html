@@ -9,12 +9,23 @@
   <script>
     // start with strings, numbers and booleans
 
+    // let age = 100;
+    // let age2 = age;
+    // console.log(age, age2);
+    // age = 200;
+    // console.log(age, age2);
+
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
+    const team = players;
+
+    // console.log(players, team);
 
     // You might think we can just do something like this:
+    // team[3] = "Lux";
+    // console.log(players, team);
 
     // however what happens when we update that array?
 
@@ -25,14 +36,27 @@
     // Why? It's because that is an array reference, not an array copy. They both point to the same array!
 
     // So, how do we fix this? We take a copy instead!
-
+    
     // one way
-
+    const team2 = players.slice();
+    team2[2] = 'Lux';
+    
     // or create a new array and concat the old one in
+    const team3 = [].concat(players);
 
     // or use the new ES6 Spread
+    const team4 = [...players];
 
     // now when we update it, the original one isn't changed
+    team3[1] = "amber";
+    team4[3] = "jilly";
+    console.log(`Players: ${players}`);
+    console.log(`Team2: ${team2}`);
+    console.log(`Team3: ${team3}`);
+    console.log(`Team4: ${team4}`);
+
+    const team5 = Array.from(players);
+    console.log(team5);
 
     // The same thing goes for objects, let's say we have a person object
 
@@ -43,12 +67,40 @@
     };
 
     // and think we make a copy:
+    // const captain = person;
+    // captain.num = 99;
+    // console.log(captain, person);
 
     // how do we take a copy instead?
+    const cap2 = Object.assign({}, person, { number: 99, age: 100, name: "Amber" });
+    console.log(cap2);
 
     // We will hopefully soon see the object ...spread
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+    console.clear();
+
+    const amber = {
+      name: "amber",
+      age: 99, 
+      social: {
+        twitter: "@ambydasu",
+        facebook: "ambyd"
+      }
+    };
+
+    console.log(amber.social);
+
+    const dev = Object.assign({}, amber);
+
+    // dev.social.twitter = "@pooop";
+    
+    const dev2 = JSON.parse(JSON.stringify(amber));
+    dev2.social.twitter = "@poopoo";
+
+    console.log(amber.social);
+    console.log(dev2.social);
 
   </script>
 
